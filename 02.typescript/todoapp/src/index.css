@@ -72,6 +72,8 @@ dl {
 
 .todoList a {
   text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: black;
 }
 
@@ -227,6 +229,7 @@ dl {
   border-radius: 5px;
   border: 1px solid #d9d9d9;
   margin: 10px 0;
+  resize: none;
 }
 
 .update .addButton {
@@ -383,6 +386,7 @@ dl {
   justify-content: space-between;
   gap: 15px;
   font-size: 20px;
+  resize: none;
 }
 
 .update .titleInput {
@@ -395,6 +399,7 @@ dl {
   min-height: 80px;
   border-radius: 5px;
   border: 1px solid #d9d9d9;
+  resize: none;
 }
 
 .update .addButton {
@@ -488,6 +493,7 @@ dl {
   border-radius: 5px;
   border: 1px solid #d9d9d9;
   height: 360px;
+  resize: none;
 }
 
 .regist .addButton {
