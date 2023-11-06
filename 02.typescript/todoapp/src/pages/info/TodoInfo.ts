@@ -13,8 +13,8 @@ const TodoInfo = async function (): Promise<HTMLElement> {
   const _id = searchParam('_id');
 
   const page = document.createElement("div");
-  page.setAttribute("id", "todoInfo");
-  page.id = "todoInfo";
+  page.setAttribute("id", "app");
+  page.setAttribute("class", "todoInfo");
 
   // const topSection = document.createElement("div");
   // topSection.className = "topSection";
@@ -38,7 +38,7 @@ const TodoInfo = async function (): Promise<HTMLElement> {
     const titleTodo = document.createTextNode(response.data.item.title);
 
     title.className = "todoListTitle";
-    todoContent.className = "todoList";
+    // todoContent.className = "todoList";
 
     content.appendChild(title);
     content.appendChild(todoContent);
@@ -51,7 +51,7 @@ const TodoInfo = async function (): Promise<HTMLElement> {
     const detailTodo = document.createTextNode(response.data.item.content);
 
     detail.className = "todoListTitle";
-    detailContent.className = "todoList , detailContent";
+    detailContent.className = "detailContent";
 
     content.appendChild(detail);
     content.appendChild(detailContent);
@@ -74,7 +74,7 @@ const TodoInfo = async function (): Promise<HTMLElement> {
       //   done: response.data.item.done,
       // });
       // document.querySelector("#todoInfo").replaceWith(updatePage);
-      linkTo(`update?_id=${_id}`);
+      linkTo(`/update?_id=${_id}`);
     });
   } catch (error) {
     console.error("오류가 발생했습니다.");
