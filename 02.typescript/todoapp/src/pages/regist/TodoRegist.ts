@@ -3,6 +3,7 @@ import axios from "axios";
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import Nav from "../../layout/Nav";
+import { linkTo } from "../../Router";
 
 const TodoRegist = function (): HTMLElement {
   const page = document.createElement("div");
@@ -56,6 +57,7 @@ const TodoRegist = function (): HTMLElement {
   addButton.className = "addButton";
   const addText = document.createTextNode("추가하기");
   // addText.className = "addText";
+  addButton.type = "button";
   addButton.appendChild(addText);
   form.appendChild(addButton);
 
@@ -68,6 +70,7 @@ const TodoRegist = function (): HTMLElement {
       })
       .then(function (response) {
         console.log(response);
+        linkTo("/");
       })
       .catch(function (error) {
         console.log(error);
