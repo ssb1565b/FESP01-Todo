@@ -1,10 +1,11 @@
 import axios from "axios";
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
+import { linkTo } from "../../Router";
 // import { linkTo } from "../../Router";
-import TodoRegist from "../regist/TodoRegist";
-import TodoInfo from "../info/TodoInfo";
-import TodoUpdate from "../update/TodoUpdate";
+// import TodoRegist from "../regist/TodoRegist";
+// import TodoInfo from "../info/TodoInfo";
+// import TodoUpdate from "../update/TodoUpdate";
 
 const TodoList = async function () {
   const page = document.createElement("div");
@@ -78,22 +79,23 @@ const TodoList = async function () {
 
       // 수정버튼 클릭 함수
       todoUpdateButton.addEventListener("click", async () => {
-        response = await axios(
-          `http://localhost:33088/api/todolist/${item._id}`
-        );
-        let {
-          content = "",
-          _id = "",
-          title = "",
-          done = false,
-        } = { ...response.data.item };
-        const updatePage = await TodoUpdate({
-          _id: _id,
-          updateTitle: title,
-          updateContent: content,
-          done: done,
-        });
-        document.querySelector("#todoList")!.replaceWith(updatePage);
+        linkTo(`/update?_id=${item._id}`);
+        // response = await axios(
+        //   `http://localhost:33088/api/todolist/${item._id}`
+        // );
+        // let {
+        //   content = "",
+        //   _id = "",
+        //   title = "",
+        //   done = false,
+        // } = { ...response.data.item };
+        // const updatePage = await TodoUpdate({
+        //   _id: _id,
+        //   updateTitle: title,
+        //   updateContent: content,
+        //   done: done,
+        // });
+        // document.querySelector("#todoList")!.replaceWith(updatePage);
       });
 
       // 삭제 버튼
@@ -162,8 +164,9 @@ const TodoList = async function () {
       todoInfoLink.addEventListener("click", async function (event) {
         // 브라우저의 기본 동작 취소(<a> 태그 동작 안하도록)
         event.preventDefault();
-        const infoPage = await TodoInfo({ _id: item._id });
-        document.querySelector("#todoList")!.replaceWith(infoPage);
+        // const infoPage = await TodoInfo({ _id: item._id });
+        // document.querySelector("#todoList")!.replaceWith(infoPage);
+        linkTo(`/info?_id=${item._id}`);
       });
 
       todoInfoLink.appendChild(title);
@@ -204,8 +207,9 @@ const TodoList = async function () {
     content.appendChild(btnRegist);
 
     btnRegist.addEventListener("click", () => {
-      const registPage = TodoRegist();
-      document.querySelector("#todoList")!.replaceWith(registPage);
+      // const registPage = TodoRegist();
+      // document.querySelector("#todoList")!.replaceWith(registPage);
+      linkTo(`/regist`);
     });
   } catch (err) {
     const error = document.createTextNode("일시적인 오류 발생");
