@@ -39,7 +39,7 @@ const TodoList = async function(){
     content.appendChild(btnRegist);
 
     btnRegist.addEventListener('click', () => {
-      linkTo('regist');
+      linkTo('/regist');
     });
 
   }catch(err){

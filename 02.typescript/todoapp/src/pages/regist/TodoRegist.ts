@@ -6,7 +6,8 @@ import Nav from "../../layout/Nav";
 
 const TodoRegist = function (): HTMLElement {
   const page = document.createElement("div");
-  page.setAttribute("id", "regist");
+  page.setAttribute("id", "app");
+  page.setAttribute("class", "regist");
 
   const content = document.createElement("div");
   content.id = "content";

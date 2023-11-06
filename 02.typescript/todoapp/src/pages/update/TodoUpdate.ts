@@ -14,7 +14,8 @@ const TodoUpdate = async function (): Promise<HTMLElement> {
   const _id = searchParam('_id');
 
   const page = document.createElement("div");
-  page.setAttribute("id", "update");
+  page.setAttribute("id", "app");
+  page.setAttribute("class", "update");
 
   const content = document.createElement("div");
   content.id = "content";
@@ -110,7 +111,7 @@ const TodoUpdate = async function (): Promise<HTMLElement> {
       }
       await axios.patch<TodoResponse>(`http://localhost:33088/api/todolist/${_id}`, body).then((response) => {
         console.log(response);
-        linkTo(`info?_id=${_id}`);
+        linkTo(`/info?_id=${_id}`);
       }).catch((error) => {
         console.log(error);
       })

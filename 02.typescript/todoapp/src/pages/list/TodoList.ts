@@ -9,7 +9,8 @@ import { linkTo } from "../../Router";
 
 const TodoList = async function (): Promise<HTMLElement> {
   const page = document.createElement("div");
-  page.setAttribute("id", "todoList");
+  page.setAttribute("id", "app");
+  page.setAttribute("class", "todoList");
 
   const content = document.createElement("div");
   content.setAttribute("id", "content");

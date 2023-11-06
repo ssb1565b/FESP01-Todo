@@ -1,4 +1,4 @@
-const Footer = function(){
+const Footer = function(): HTMLElement {
   const footerNode = document.createElement('footer');
   const pNode = document.createElement('p');
   const content = document.createTextNode('FESP 1기 Javascript Project');
