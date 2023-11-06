@@ -1,5 +1,7 @@
+import axios from "axios";
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
+// import { linkTo } from "../../Router";
 import TodoRegist from "../regist/TodoRegist";
 import TodoInfo from "../info/TodoInfo";
 import TodoUpdate from "../update/TodoUpdate";
@@ -12,7 +14,9 @@ const TodoList = async function () {
   content.setAttribute("id", "content");
   let response;
   try {
-    response = await axios("http://localhost:33088/api/todolist");
+    response = await axios<TodoListResponse>(
+      "http://localhost:33088/api/todolist"
+    );
 
     const mainContainer = document.createElement("div");
     mainContainer.classList.add("class", "mainContainer");
@@ -36,23 +40,23 @@ const TodoList = async function () {
 
       checkbox.addEventListener("click", async (event) => {
         event.preventDefault();
-        console.log(event.target.checked);
-        const check = event.target.checked;
 
-        if (item.done === true) {
-          item.done = false;
-        } else {
-          item.done = true;
-        }
+        item.done = !item.done as boolean;
+        // if (item.done === true) {
+        //   itemDone = false;
+        // } else {
+        //   itemDone = true;
+        // }
 
         try {
           const response = await axios.patch(
             `http://localhost:33088/api/todolist/${item._id}`,
             {
-              done: item.done,
+              done: item.done as boolean,
             }
           );
-          // console.log(response.data.item.done);
+
+          console.log(response.data.item.done);
         } catch (err) {
           console.error(err);
         }
@@ -77,14 +81,19 @@ const TodoList = async function () {
         response = await axios(
           `http://localhost:33088/api/todolist/${item._id}`
         );
-        let { content, _id, title, done } = { ...response.data.item };
+        let {
+          content = "",
+          _id = "",
+          title = "",
+          done = false,
+        } = { ...response.data.item };
         const updatePage = await TodoUpdate({
           _id: _id,
           updateTitle: title,
           updateContent: content,
           done: done,
         });
-        document.querySelector("#todoList").replaceWith(updatePage);
+        document.querySelector("#todoList")!.replaceWith(updatePage);
       });
 
       // 삭제 버튼
@@ -115,7 +124,7 @@ const TodoList = async function () {
       }
 
       // 체크박스 토글기능 이벤트
-      checkImage.addEventListener("click", function (e) {
+      checkImage.addEventListener("click", function () {
         if (checkbox.checked === true) {
           checkbox.checked = false;
         } else {
@@ -124,7 +133,7 @@ const TodoList = async function () {
       });
 
       // 투두리스트 글자색이 변경되는 이벤트
-      checkbox.addEventListener("click", function (e) {
+      checkbox.addEventListener("click", function () {
         const done = item.done;
 
         if (!done) {
@@ -154,7 +163,7 @@ const TodoList = async function () {
         // 브라우저의 기본 동작 취소(<a> 태그 동작 안하도록)
         event.preventDefault();
         const infoPage = await TodoInfo({ _id: item._id });
-        document.querySelector("#todoList").replaceWith(infoPage);
+        document.querySelector("#todoList")!.replaceWith(infoPage);
       });
 
       todoInfoLink.appendChild(title);
@@ -196,7 +205,7 @@ const TodoList = async function () {
 
     btnRegist.addEventListener("click", () => {
       const registPage = TodoRegist();
-      document.querySelector("#todoList").replaceWith(registPage);
+      document.querySelector("#todoList")!.replaceWith(registPage);
     });
   } catch (err) {
     const error = document.createTextNode("일시적인 오류 발생");

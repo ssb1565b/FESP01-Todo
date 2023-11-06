@@ -1,4 +1,5 @@
 // 할일 등록
+import axios from "axios";
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import Nav from "../../layout/Nav";
@@ -53,13 +54,13 @@ const TodoRegist = function () {
   const addButton = document.createElement("button");
   addButton.className = "addButton";
   const addText = document.createTextNode("추가하기");
-  addText.className = "addText";
+  // addText.className = "addText";
   addButton.appendChild(addText);
   form.appendChild(addButton);
 
   addButton.addEventListener("click", async () => {
-    response = await axios
-      .post("http://localhost:33088/api/todolist", {
+    await axios
+      .post<TodoItem>("http://localhost:33088/api/todolist", {
         title: titleInput.value,
         content: detailInput.value,
         done: false,
