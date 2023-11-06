@@ -4,7 +4,7 @@ import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
 import Nav from "../../layout/Nav";
 
-const TodoRegist = function () {
+const TodoRegist = function (): HTMLElement {
   const page = document.createElement("div");
   page.setAttribute("id", "regist");
 

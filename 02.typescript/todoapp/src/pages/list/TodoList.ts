@@ -7,7 +7,7 @@ import { linkTo } from "../../Router";
 // import TodoInfo from "../info/TodoInfo";
 // import TodoUpdate from "../update/TodoUpdate";
 
-const TodoList = async function () {
+const TodoList = async function (): Promise<HTMLElement> {
   const page = document.createElement("div");
   page.setAttribute("id", "todoList");
 
