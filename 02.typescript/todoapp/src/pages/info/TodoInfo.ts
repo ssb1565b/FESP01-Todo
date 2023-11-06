@@ -1,10 +1,17 @@
 // 할일 등록
 import Header from "../../layout/Header";
 import Footer from "../../layout/Footer";
-import TodoUpdate from "../update/TodoUpdate";
 import Nav from "../../layout/Nav";
+import axios from "axios";
+import { linkTo } from "../../Router";
 
-const TodoInfo = async function ({ _id } = {}) {
+const TodoInfo = async function (): Promise<HTMLElement> {
+  // 쿼리스트링 값 가져오기
+  const searchParam = (key: string): string | null => {
+    return new URLSearchParams(location.search).get(key);
+  }
+  const _id = searchParam('_id');
+
   const page = document.createElement("div");
   page.setAttribute("id", "todoInfo");
   page.id = "todoInfo";
@@ -22,12 +29,8 @@ const TodoInfo = async function ({ _id } = {}) {
 
   const content = document.createElement("dl");
 
-  let response;
-
   try {
-    response = await axios(`http://localhost:33088/api/todolist/${_id}`);
-
-    console.log("todoinfo", response.data.item);
+    const response = (await axios<TodoResponse>(`http://localhost:33088/api/todolist/${_id}`));
 
     const title = document.createElement("dt");
     const titleText = document.createTextNode("제목");
@@ -64,13 +67,14 @@ const TodoInfo = async function ({ _id } = {}) {
     modifyButton.appendChild(modifyButtonText);
 
     modifyButton.addEventListener("click", async () => {
-      const updatePage = await TodoUpdate({
-        _id: response.data.item._id,
-        updateTitle: response.data.item.title,
-        updateContent: response.data.item.content,
-        done: response.data.item.done,
-      });
-      document.querySelector("#todoInfo").replaceWith(updatePage);
+      // const updatePage = await TodoUpdate({
+      //   _id: response.data.item._id,
+      //   updateTitle: response.data.item.title,
+      //   updateContent: response.data.item.content,
+      //   done: response.data.item.done,
+      // });
+      // document.querySelector("#todoInfo").replaceWith(updatePage);
+      linkTo(`update?_id=${_id}`);
     });
   } catch (error) {
     console.error("오류가 발생했습니다.");
