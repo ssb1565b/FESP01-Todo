@@ -9,8 +9,8 @@ const TodoInfo = async function (): Promise<HTMLElement> {
   // 쿼리스트링 값 가져오기
   const searchParam = (key: string): string | null => {
     return new URLSearchParams(location.search).get(key);
-  }
-  const _id = searchParam('_id');
+  };
+  const _id = searchParam("_id");
 
   const page = document.createElement("div");
   page.setAttribute("id", "app");
@@ -30,7 +30,9 @@ const TodoInfo = async function (): Promise<HTMLElement> {
   const content = document.createElement("dl");
 
   try {
-    const response = (await axios<TodoResponse>(`http://localhost:33088/api/todolist/${_id}`));
+    const response = await axios<TodoResponse>(
+      `http://localhost:33088/api/todolist/${_id}`
+    );
 
     const title = document.createElement("dt");
     const titleText = document.createTextNode("제목");

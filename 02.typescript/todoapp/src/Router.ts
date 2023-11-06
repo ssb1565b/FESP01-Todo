@@ -31,7 +31,7 @@ async function render(): Promise<void> {
   const page = await getPage();
   const pageElement = document.querySelector("#app");
   if (pageElement && page) {
-    pageElement.replaceWith(page); 
+    pageElement.replaceWith(page);
   }
 }
 
