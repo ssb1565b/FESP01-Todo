@@ -97,7 +97,7 @@ export default function TodoUpdate() {
                 defaultChecked={data?.done}
                 type="checkbox"
                 className="border border-gray-300 border-solid"
-                onChange={(e) => handleChange(e, "done")}
+                onClick={(e) => handleChange(e, "done")}
               />
             </div>
             <button
