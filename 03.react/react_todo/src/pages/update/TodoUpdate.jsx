@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-// import Nav from "../../layout/Nav";
-// import Header from "../../layout/Header";
+import Nav from "../../layout/Nav";
+import Header from "../../layout/Header";
 
 export default function TodoUpdate() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function TodoUpdate() {
         .patch(`http://localhost:33088/api/todolist/${_id}`, body)
         .then((response) => {
           console.log("수정 완료", response);
-          // navigate("/");
+          navigate("/");
         })
         .catch((error) => {
           console.log(error);
@@ -57,13 +57,8 @@ export default function TodoUpdate() {
 
   return (
     <>
-      {/* <Nav /> */}
-      {/* <Header title={"TodoApp 수정"} /> */}
-      <header>
-        <h1 className="font-bold text-white text-3xl px-7 py-7">
-          TodoApp 수정
-        </h1>
-      </header>
+      <Nav />
+      <Header title={"TodoApp 수정"} />
 
       <div id="content  w-[390px] h-[80vh] ">
         <div className="wrapper h-[650px] px-7 py-7 bg-[#ffffff]">

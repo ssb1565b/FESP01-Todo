@@ -1,7 +1,9 @@
 function Footer() {
   return (
     <footer>
-      <p>FESP 1기 Javascript Project</p>
+      <p className="text-white font-bold text-center my-7">
+        FESP 1기 Javascript Project
+      </p>
     </footer>
   );
 }
